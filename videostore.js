@@ -1,17 +1,12 @@
 //http://martinfowler.com/articles/refactoring-video-store-js/
 'use strict'
-function statement(customer, movies) {
+export default function statement(customer, movies) {
   let totalAmount = 0;
   let frequentRenterPoints = 0;
   let result = `Rental Record for ${customer.name}\n`;
   for (let r of customer.rentals) {
-    let thisAmount = amountFor(r);
+    const thisAmount = amountFor(r);
     frequentRenterPoints += frequentRenterPointsFor(r)
-
-    //add frequent renter points
-    frequentRenterPoints++;
-    // add bonus for a two day new release rental
-    if(movieFor(r).code === "new" && r.days > 2) frequentRenterPoints++;
 
     //print figures for this rental
     result += `\t${movieFor(r).title}\t${thisAmount}\n` ;
@@ -57,18 +52,3 @@ function statement(customer, movies) {
 
   function movieFor(rental) {return movies[rental.movieID];}
 }
-let martin = {
-  "name": "martin",
-  "rentals": [
-    {"movieID": "F001", "days": 3},
-    {"movieID": "F002", "days": 1},
-  ]
-};
-
-let movies = {
-  "F001": {"title": "Ran",                     "code": "regular"},
-  "F002": {"title": "Trois Couleurs: Bleu",     "code": "regular"},
-  // etc
-};
-
-console.log(statement(martin,movies));
