@@ -10,23 +10,18 @@ export default function statement(customer, movies) {
   return result;
 
   function totalAmount(){
-    let result = 0;
-    for (let r of customer.rentals) {
-      result += amountFor(r);
-    }
-    return result;
+    return customer.rentals
+      .reduce((total, r) => total + amountFor(r), 0);
   }
 
   function totalFrequentRenterPoints(){
-    let result = 0;
-    for (let r of customer.rentals) {
-      result += frequentRenterPointsFor(r);
-    }
-    return result;
+    return customer.rentals
+      .map((r) => frequentRenterPointsFor(r))
+      .reduce((a,b) => a + b);
   }
 
   function frequentRenterPointsFor(r) {
-   //add frequent renter points
+    //add frequent renter points
     let result = 1;
     // add bonus for a two day new release rental
     if (movieFor(r).code === "new" && r.days > 2) result++;
