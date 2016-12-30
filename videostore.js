@@ -6,7 +6,7 @@ function statement(customer, movies) {
   let result = `Rental Record for ${customer.name}\n`;
   for (let r of customer.rentals) {
     let thisAmount = amountFor(r);
-    frequentRenterPointsFor(r);
+    frequentRenterPoints += frequentRenterPointsFor(r)
 
     // determine amount for each movie
     switch (movieFor(r).code) {
@@ -44,9 +44,10 @@ function statement(customer, movies) {
 
   function frequentRenterPointsFor(r) {
    //add frequent renter points
-    frequentRenterPoints++;
+    let result = 1;
     // add bonus for a two day new release rental
-    if (movieFor(r).code === "new" && r.days > 2) frequentRenterPoints++;
+    if (movieFor(r).code === "new" && r.days > 2) result++;
+    return result;
   }
 
   function amountFor(r){
