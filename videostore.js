@@ -5,12 +5,9 @@ export default function statement(customer, movies) {
   let frequentRenterPoints = 0;
   let result = `Rental Record for ${customer.name}\n`;
   for (let r of customer.rentals) {
-    const thisAmount = amountFor(r);
-    frequentRenterPoints += frequentRenterPointsFor(r)
-
-    //print figures for this rental
-    result += `\t${movieFor(r).title}\t${thisAmount}\n` ;
-    totalAmount += thisAmount;
+    frequentRenterPoints += frequentRenterPointsFor(r);
+    result += `\t${movieFor(r).title}\t${amountFor(r)}\n`;
+    totalAmount += amountFor(r);
   }
   // add footer lines
   result += `Amount owed is ${totalAmount}\n`;
