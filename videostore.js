@@ -8,25 +8,6 @@ function statement(customer, movies) {
     let thisAmount = amountFor(r);
     frequentRenterPoints += frequentRenterPointsFor(r)
 
-    // determine amount for each movie
-    switch (movieFor(r).code) {
-      case "regular":
-        thisAmount = 2;
-        if (r.days > 2) {
-          thisAmount += (r.days - 2) * 1.5;
-        }
-        break;
-      case "new":
-        thisAmount = r.days * 3;
-        break;
-      case "childrens":
-        thisAmount = 1.5;
-        if (r.days > 3) {
-          thisAmount += (r.days - 3) * 1.5;
-        }
-        break;
-    }
-
     //add frequent renter points
     frequentRenterPoints++;
     // add bonus for a two day new release rental
